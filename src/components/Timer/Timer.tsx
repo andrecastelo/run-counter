@@ -1,49 +1,13 @@
 import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-
-const Button = styled.button`
-  padding: 8px;
-  font-size: 20px;
-`;
-
-const TimerText = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  font-family: sans-serif;
-`;
-
-const RunText = styled.p`
-  font-family: sans-serif;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 16px;
-  align-items: center;
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-
-const TimerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  gap: 16px;
-`;
-
-const RunList = styled.div`
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-start;
-  gap: 16px;
-`;
+import {
+  TimerContainer,
+  TimerText,
+  ButtonContainer,
+  Button,
+  InfoRow,
+  RunText,
+  RunList,
+} from './styles';
 
 type Run = {
   duration: number;
