@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
 const Button = styled.button`
   padding: 8px;
@@ -15,6 +14,35 @@ const TimerText = styled.div`
 
 const RunText = styled.p`
   font-family: sans-serif;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  align-items: center;
+`;
+
+const InfoRow = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+const TimerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  gap: 16px;
+`;
+
+const RunList = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  gap: 16px;
 `;
 
 type Run = {
@@ -74,26 +102,9 @@ export const Timer = () => {
   }, [active, duration]);
 
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 24px;
-        gap: 16px;
-      `}
-    >
+    <TimerContainer>
       <TimerText>{formatDuration(duration)}</TimerText>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          gap: 16px;
-          align-items: center;
-        `}
-      >
+      <ButtonContainer>
         <Button onClick={() => setActive((x) => (x ? false : true))}>
           {active ? 'Pause' : 'Start'}
         </Button>
@@ -101,39 +112,19 @@ export const Timer = () => {
           Clear
         </Button>
         {active && <Button onClick={nextRun}>Next Run</Button>}
-      </div>
-      <div
-        css={css`
-          display: flex;
-          gap: 16px;
-        `}
-      >
+      </ButtonContainer>
+      <InfoRow>
         <RunText>Total Run:</RunText>
         <RunText>{formatDuration(totalRun)}</RunText>
-      </div>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column-reverse;
-          justify-content: flex-start;
-          gap: 16px;
-        `}
-      >
+      </InfoRow>
+      <RunList>
         {runs.map((run, index) => (
-          <div
-            key={`run__${index}`}
-            css={css`
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              gap: 16px;
-            `}
-          >
+          <InfoRow key={`run__${index}`}>
             <RunText>{index + 1}</RunText>
             <RunText>{formatDuration(run.duration)}</RunText>
-          </div>
+          </InfoRow>
         ))}
-      </div>
-    </div>
+      </RunList>
+    </TimerContainer>
   );
 };
