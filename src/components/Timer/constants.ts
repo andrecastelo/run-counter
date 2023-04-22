@@ -1,0 +1,3 @@
+export const UPDATE_INTERVAL = 100;
+export const DURATION_DENOMINATOR = 1000 / UPDATE_INTERVAL;
+export const DECIMALS = 4 - `${UPDATE_INTERVAL}`.length;

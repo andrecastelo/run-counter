@@ -12,8 +12,21 @@ export const TimerText = styled.div`
   font-family: sans-serif;
 `;
 
-export const RunText = styled.p`
+type RunTextType = 'normal' | 'best' | 'worst';
+
+type RunTextProps = {
+  type?: RunTextType;
+};
+
+const runTextColor: Record<RunTextType, string> = {
+  normal: 'var(--foreground-rgb)',
+  best: '#65c460',
+  worst: '#c46060',
+};
+
+export const RunText = styled.p<RunTextProps>`
   font-family: sans-serif;
+  color: ${({ type }) => (type ? runTextColor[type] : runTextColor.normal)};
 `;
 
 export const ButtonContainer = styled.div`
