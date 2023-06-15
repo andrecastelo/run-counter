@@ -4,22 +4,26 @@ import { Run } from './types';
 import { formatDuration } from './formatDuration';
 import { UPDATE_INTERVAL } from './constants';
 import { RunStats } from './RunStats';
+import { useSessions } from '../Session/useSessions';
 
 export const Timer = () => {
   const [active, setActive] = useState(false);
-  const [runs, setRuns] = useState<Run[]>([]);
   const [duration, setDuration] = useState(0);
+  const { saveRun, activeSession, clearRuns } = useSessions();
+
+  const runs = activeSession.runs;
 
   const nextRun = () => {
     const lastRun = runs[runs.length - 1];
-    setRuns([...runs, { duration, index: (lastRun?.index || 0) + 1 }]);
+    const run = { duration, index: (lastRun?.index || 0) + 1 };
+    saveRun(run);
     setDuration(0);
   };
 
   const clear = () => {
     setActive(false);
     setDuration(0);
-    setRuns([]);
+    clearRuns();
   };
 
   const stop = () => {
@@ -45,7 +49,7 @@ export const Timer = () => {
 
   return (
     <TimerContainer>
-      <TimerText>Session #01</TimerText>
+      <TimerText>{activeSession.name}</TimerText>
       <TimerText>{formatDuration(duration)}</TimerText>
       <ButtonContainer>
         <Button onClick={() => setActive((x) => (x ? false : true))}>

@@ -11,6 +11,7 @@ export const useSessions = () => {
   const { state, dispatch } = context;
 
   const activeSession = state.sessions[state.activeSession];
+  const sessions = state.sessions;
 
   const saveRun = (run: Run) =>
     dispatch({ type: 'addRunToActiveSession', payload: run });
@@ -25,6 +26,8 @@ export const useSessions = () => {
 
   return {
     activeSession,
+    sessions,
+
     saveRun,
     clearRuns,
     switchActive,

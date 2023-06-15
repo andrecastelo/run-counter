@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { Timer } from '@/components';
-import { SessionProvider } from '@/components/Session';
+import { SessionList, SessionProvider } from '@/components/Session';
 
 export default function Home() {
   return (
@@ -11,7 +11,10 @@ export default function Home() {
       </Head>
       <main>
         <SessionProvider>
-          <Timer />
+          <div>
+            <Timer />
+            <SessionList />
+          </div>
         </SessionProvider>
       </main>
     </React.Fragment>

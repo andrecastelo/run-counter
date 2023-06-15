@@ -2,7 +2,7 @@ import { Action, State } from './types';
 
 export const initialState: State = {
   activeSession: 0,
-  sessions: [{ id: 1, name: 'Sesssion #001', runs: [] }],
+  sessions: [{ id: 1, name: 'Session #001', runs: [] }],
 };
 
 export const sessionReducer = (state: State, action: Action) => {
