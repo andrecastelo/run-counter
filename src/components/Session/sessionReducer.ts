@@ -21,15 +21,13 @@ export const sessionReducer = (state: State, action: Action) => {
 
     case 'deleteSession': {
       const id = action.payload;
+      if (state.sessions.length < 1) break;
       state.sessions = state.sessions.filter((s) => s.id === id);
       break;
     }
 
-    case 'saveSession': {
-      const session = state.sessions.find((s) => s.id === action.payload.id);
-      if (!session) break;
-      session.name = action.payload.name;
-      session.runs = action.payload.runs;
+    case 'renameActiveSession': {
+      state.sessions[state.activeSession].name = action.payload;
       break;
     }
 
@@ -47,6 +45,11 @@ export const sessionReducer = (state: State, action: Action) => {
       } else {
         state.activeSession = newActiveSessionIndex;
       }
+      break;
+    }
+
+    case 'clearActiveSession': {
+      state.sessions[state.activeSession].runs = [];
       break;
     }
 

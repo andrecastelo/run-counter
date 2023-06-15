@@ -8,9 +8,10 @@ export type Session = {
 
 export type Action =
   | { type: 'newSession'; payload: { name: string; runs: Run[] } }
-  | { type: 'saveSession'; payload: Session }
   | { type: 'switchActiveSession'; payload: number }
+  | { type: 'renameActiveSession'; payload: string }
   | { type: 'addRunToActiveSession'; payload: Run }
+  | { type: 'clearActiveSession' }
   | { type: 'deleteSession'; payload: number };
 
 export type State = {
