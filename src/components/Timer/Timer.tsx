@@ -22,6 +22,11 @@ export const Timer = () => {
     setRuns([]);
   };
 
+  const stop = () => {
+    nextRun();
+    setActive(false);
+  };
+
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | null = null;
     if (active) {
@@ -40,6 +45,7 @@ export const Timer = () => {
 
   return (
     <TimerContainer>
+      <TimerText>Session #01</TimerText>
       <TimerText>{formatDuration(duration)}</TimerText>
       <ButtonContainer>
         <Button onClick={() => setActive((x) => (x ? false : true))}>
@@ -47,6 +53,9 @@ export const Timer = () => {
         </Button>
         <Button disabled={runs.length === 0} onClick={clear}>
           Clear
+        </Button>
+        <Button disabled={!active} onClick={stop}>
+          Stop
         </Button>
         {active && <Button onClick={nextRun}>Next Run</Button>}
       </ButtonContainer>
